@@ -1,0 +1,30 @@
+{
+  "name": "mock-mongo-db",
+  "version": "1.0.0",
+  "description": "A mock of node.js's mongo db adapter core functionality to aid in unit testing complex functionality that hits the database. Supports basic operations, such as find, group, insert.",
+  "main": "mockDB.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seanmcilvenna/mock-mongo-db"
+  },
+  "keywords": [
+    "mongodb",
+    "node.js",
+    "mock",
+    "unittest",
+    "unit",
+    "test"
+  ],
+  "author": "Sean McIlvenna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seanmcilvenna/mock-mongo-db/issues"
+  },
+  "homepage": "https://github.com/seanmcilvenna/mock-mongo-db",
+  "dependencies": {
+    "node-uuid": "^1.4.3"
+  }
+}
