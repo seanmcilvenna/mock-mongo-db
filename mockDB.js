@@ -4,7 +4,7 @@ module.exports = function() {
     var self = this;
     var collections = [];
 
-    self.addCollection = function(collectionName, find, group, insert, save) {
+    self.addCollection = function(collectionName, find, group, insert, save, documents) {
         var collection = null;
 
         for (var i in collections) {
@@ -15,7 +15,7 @@ module.exports = function() {
         }
 
         if (!collection) {
-            collection = new MockCollection(collectionName);
+            collection = new MockCollection(collectionName, documents);
             collections.push(collection);
         }
 
@@ -56,7 +56,7 @@ module.exports = function() {
     };
 };
 
-var MockCollection = function(collectionName) {
+var MockCollection = function(collectionName, documents) {
     var self = this;
 
     self.name = collectionName;
@@ -73,7 +73,9 @@ var MockCollection = function(collectionName) {
     self.saveCallback = null;
     self.saveCalled = 0;                // Indicates how many times the "save" operation is called
 
-    var documents = [];
+    if (!documents || !documents.length) {
+        documents = [];
+    }
 
     var getPath = function(parent, path) {
         var pathSplit = path.split('.');
