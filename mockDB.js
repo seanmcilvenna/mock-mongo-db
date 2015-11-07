@@ -73,7 +73,7 @@ var MockCollection = function(collectionName, documents) {
     self.saveCallback = null;
     self.saveCalled = 0;                // Indicates how many times the "save" operation is called
 
-    if (!documents || !documents.length) {
+    if (!documents || !(documents instanceof Array)) {
         documents = [];
     }
 
@@ -278,7 +278,8 @@ var MockCollection = function(collectionName, documents) {
         callback = args.pop();
         if (args.length > 0) options = args.shift(); else options = null;
 
-        var results = [document];
+        var clone = JSON.parse(JSON.stringify(document));
+        var results = [JSON.parse(JSON.stringify(clone))];
 
         if (self.insertCallback) {
             var result = self.insertCallback(arguments);
@@ -287,8 +288,8 @@ var MockCollection = function(collectionName, documents) {
             }
         }
 
-        results[0]._id = uuid.v4();
-        documents.push(results[0]);
+        clone._id = uuid.v4();
+        documents.push(clone);
 
         self.insertCalled++;
 
@@ -298,19 +299,20 @@ var MockCollection = function(collectionName, documents) {
 
     self.save = function(document, callback) {
         self.saveCalled++;
+        var clone = JSON.parse(JSON.stringify(document));
 
         if (document._id) {
             for (var i in documents) {
-                if (documents[i]._id = document._id) {
-                    documents.splice(i, 1, document);
-                    callback(null, [document]);
+                if (documents[i]._id = clone._id) {
+                    documents.splice(i, 1, clone);
+                    callback(null, [clone]);
                     return;
                 }
             }
         } else {
             document._id = uuid.v4();
-            documents.push(document);
-            callback(null, [document]);
+            documents.push(clone);
+            callback(null, [JSON.parse(JSON.stringify(clone))]);
             return;
         }
     };

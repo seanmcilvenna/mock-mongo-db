@@ -1,6 +1,6 @@
 {
   "name": "mock-mongo-db",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A mock of node.js's mongo db adapter core functionality to aid in unit testing complex functionality that hits the database. Supports basic operations, such as find, group, insert.",
   "main": "mockDB.js",
   "scripts": {
